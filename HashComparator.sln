@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashComparator", "HashComparator\HashComparator.csproj", "{7979F764-6A62-4A68-BE5A-B62C330AD138}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7979F764-6A62-4A68-BE5A-B62C330AD138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7979F764-6A62-4A68-BE5A-B62C330AD138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7979F764-6A62-4A68-BE5A-B62C330AD138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7979F764-6A62-4A68-BE5A-B62C330AD138}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB5C4FFB-5EC7-4D54-A241-373F38023FF6}
+	EndGlobalSection
+EndGlobal
