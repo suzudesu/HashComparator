@@ -23,6 +23,18 @@ namespace HashComparator
 		public MainWindow()
 		{
 			InitializeComponent();
+			PropertiesInit();			//プロパティ初期化
+		}
+
+		//表示されるプロパティ関連の初期化
+		private void PropertiesInit()
+		{
+			//ファイルアイコン初期化
+			FileAImage.Source = new BitmapImage(new Uri("images/drop.png", UriKind.Relative));
+			FileBImage.Source = new BitmapImage(new Uri("images/drop.png", UriKind.Relative));
+			//ファイル名初期化
+			FileANameLabel.Content = "ファイルをドロップ";
+			FileBNameLabel.Content = "ファイルをドロップ";
 		}
 	}
 }

@@ -10,3 +10,6 @@
 - SHA512/224
 - SHA512/256
 - MD5
+### 動作保証環境
+- Windows10 1703以降
+- .Net Framework 4.7.2
