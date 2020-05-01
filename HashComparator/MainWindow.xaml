@@ -17,10 +17,10 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="150"/>
 			<RowDefinition Height="1.5*"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<!-- Colmun 0 -->
@@ -29,6 +29,8 @@
 				VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
 				Background="Transparent"
 				BorderBrush="Transparent"
+				AllowDrop="True"
+				Click="FileIconImageClicked"
 				Margin="3, 3, 3, 0">
 
 			<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -36,12 +38,12 @@
 				<Image x:Name="FileAImage"
 					   Grid.Row="0" Grid.Column="0"
 					   VerticalAlignment="Stretch" HorizontalAlignment="Center"
-					   Margin="5"/>
+					   Margin="12"/>
 
 				<Rectangle x:Name="FileADropRect"
 						   Grid.Row="0" Grid.Column="0"
 						   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-						   Stroke="Gray"
+						   Stroke="Silver"
 						   StrokeThickness="3"
 						   StrokeDashArray="2"
 						   StrokeStartLineCap="Round"
@@ -95,6 +97,8 @@
 				VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
 				Background="Transparent"
 				BorderBrush="Transparent"
+				AllowDrop="True"
+				Click="FileIconImageClicked"
 				Margin="3, 3, 3, 0">
 
 			<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -102,12 +106,12 @@
 				<Image x:Name="FileBImage"
 					   Grid.Row="0" Grid.Column="0"
 					   VerticalAlignment="Stretch" HorizontalAlignment="Center"
-					   Margin="5"/>
+					   Margin="12"/>
 
 				<Rectangle x:Name="FileBDropRect"
 						   Grid.Row="0" Grid.Column="0"
 						   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-						   Stroke="Gray"
+						   Stroke="Silver"
 						   StrokeThickness="3"
 						   StrokeDashArray="2"
 						   StrokeStartLineCap="Round"
