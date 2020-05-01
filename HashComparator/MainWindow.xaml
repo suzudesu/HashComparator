@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HashComparator"
         mc:Ignorable="d"
         Title="HashComparator"
-		Height="322" Width="700">
+		Height="338" Width="700" MouseDown="Window_MouseDown">
 
 	<Grid x:Name="MainGrid">
 		<Grid.ColumnDefinitions>
@@ -15,8 +15,8 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="140"/>
-			<RowDefinition Height="1.3*"/>
+			<RowDefinition Height="150"/>
+			<RowDefinition Height="1.5*"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="*"/>
@@ -24,16 +24,38 @@
 		</Grid.RowDefinitions>
 
 		<!-- Colmun 0 -->
-		<Image x:Name="FileAImage"
-			   Grid.Row="0" Grid.Column="0"
-			   VerticalAlignment="Stretch" HorizontalAlignment="Center"
-			   Margin="0, 25, 0, 0"/>
+		<Button x:Name="FileAImageButton"
+				Grid.Row="0" Grid.Column="0"
+				VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+				Background="Transparent"
+				BorderBrush="Transparent"
+				Margin="3, 3, 3, 0">
+
+			<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+				<Image x:Name="FileAImage"
+					   Grid.Row="0" Grid.Column="0"
+					   VerticalAlignment="Stretch" HorizontalAlignment="Center"
+					   Margin="5"/>
+
+				<Rectangle x:Name="FileADropRect"
+						   Grid.Row="0" Grid.Column="0"
+						   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+						   Stroke="Gray"
+						   StrokeThickness="3"
+						   StrokeDashArray="2"
+						   StrokeStartLineCap="Round"
+						   StrokeEndLineCap="Round"
+						   RadiusX="15" RadiusY="15"
+						   Margin="0"/>
+			</Grid>
+		</Button>
 
 		<Label x:Name="FileANameLabel"
 			   Grid.Row="1" Grid.Column="0"
 			   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 			   HorizontalContentAlignment="Center"
-			   Margin="1"/>
+			   Margin="0"/>
 
 		<Button x:Name="FileAMD5Button"
 				Grid.Row="2" Grid.Column="0"
@@ -41,15 +63,15 @@
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
 				FontFamily="Consolas"
-				Margin="1"/>
-		
+				Margin="1, 2, 1, 2"/>
+
 		<Button x:Name="FileASHA256Button"
 				Grid.Row="3" Grid.Column="0"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
 				FontFamily="Consolas"
-				Margin="1"/>
+				Margin="1, 2, 1, 2"/>
 
 		<Button x:Name="FileASHA384Button"
 				Grid.Row="4" Grid.Column="0"
@@ -57,7 +79,7 @@
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
 				FontFamily="Consolas"
-				Margin="1"/>
+				Margin="1, 2, 1, 2"/>
 
 		<Button x:Name="FileASHA512Button"
 				Grid.Row="5" Grid.Column="0"
@@ -65,19 +87,41 @@
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
 				FontFamily="Consolas"
-				Margin="1"/>
+				Margin="1, 2, 1, 2"/>
 
 		<!-- Colmun 2 -->
-		<Image x:Name="FileBImage"
-			   Grid.Row="0" Grid.Column="2"
-			   VerticalAlignment="Stretch" HorizontalAlignment="Center"
-			   Margin="0, 25, 0, 0"/>
+		<Button x:Name="FileBImageButton"
+				Grid.Row="0" Grid.Column="2"
+				VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+				Background="Transparent"
+				BorderBrush="Transparent"
+				Margin="3, 3, 3, 0">
+
+			<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+				<Image x:Name="FileBImage"
+					   Grid.Row="0" Grid.Column="0"
+					   VerticalAlignment="Stretch" HorizontalAlignment="Center"
+					   Margin="5"/>
+
+				<Rectangle x:Name="FileBDropRect"
+						   Grid.Row="0" Grid.Column="0"
+						   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+						   Stroke="Gray"
+						   StrokeThickness="3"
+						   StrokeDashArray="2"
+						   StrokeStartLineCap="Round"
+						   StrokeEndLineCap="Round"
+						   RadiusX="15" RadiusY="15"
+						   Margin="0"/>
+			</Grid>
+		</Button>
 
 		<Label x:Name="FileBNameLabel"
 			   Grid.Row="1" Grid.Column="2"
 			   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 			   HorizontalContentAlignment="Center"
-			   Margin="1"/>
+			   Margin="0"/>
 
 		<Button x:Name="FileBMD5Button"
 				Grid.Row="2" Grid.Column="2"
@@ -85,7 +129,7 @@
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
 				FontFamily="Consolas"
-				Margin="1"/>
+				Margin="1, 2, 1, 2"/>
 
 		<Button x:Name="FileBSHA256Button"
 				Grid.Row="3" Grid.Column="2"
@@ -93,7 +137,7 @@
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
 				FontFamily="Consolas"
-				Margin="1"/>
+				Margin="1, 2, 1, 2"/>
 
 		<Button x:Name="FileBSHA384Button"
 				Grid.Row="4" Grid.Column="2"
@@ -101,7 +145,7 @@
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
 				FontFamily="Consolas"
-				Margin="1"/>
+				Margin="1, 2, 1, 2"/>
 
 		<Button x:Name="FileBSHA512Button"
 				Grid.Row="5" Grid.Column="2"
@@ -109,7 +153,7 @@
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
 				FontFamily="Consolas"
-				Margin="1"/>
+				Margin="1, 2, 1, 2"/>
 
 		<!-- Colmn 1 -->
 		<Label x:Name="MD5NameLabel"
@@ -135,6 +179,5 @@
 			   VerticalAlignment="Top" HorizontalAlignment="Center"
 			   Foreground="DimGray"
 			   Content="SHA512"/>
-
 	</Grid>
 </Window>

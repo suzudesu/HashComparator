@@ -13,10 +13,11 @@ namespace HashComparator.Settings
 	{
 		public class Button
 		{
-			public Brush DefaultBorder { get { return Brushes.LightGray; } }
+			public Brush DefaultBorder { get { return Brushes.Gainsboro; } }
 			public Brush DefaultBackground { get { return Brushes.White; } }
-			public Brush MatchBackground { get { return Brushes.LightSeaGreen; } }
-			public Brush NotMatchBackground { get { return Brushes.Salmon; } }
+			public Brush Loaded { get { return Brushes.DeepSkyBlue; } }
+			public Brush Match { get { return Brushes.LimeGreen; } }
+			public Brush NotMatch { get { return Brushes.OrangeRed; } }
 		}
 	}
 }
