@@ -21,6 +21,8 @@ namespace HashComparator.Settings
 
 		//ファイルアイコンボタン関連
 		public Button FileIconButton { get; set; }								//ボタンの実体
+		public bool ViewFileNameFlag { get; set; }								//ファイル名の表示方法(フルパス:true, 名前のみ:false)
+		public TextBlock FileNameTextBlock { get; set; }						//ファイル名テキストブロック
 
 		//パス関連
 		public string FilePath { get; set; }                                    //フルパス
@@ -35,6 +37,16 @@ namespace HashComparator.Settings
 		{
 			FilePath = "";
 			Status = FileLoadStatus.NoSelect;
+			ViewFileNameFlag = false;
+		}
+
+		//ファイル名の設定
+		public void SetFileNameLabel()
+		{
+			if (FilePath == null || FilePath.Length == 0)							//ファイル未選択時
+				FileNameTextBlock.Text = "ファイルをドロップ";
+			else																	//ファイル選択済時
+				FileNameTextBlock.Text = ViewFileNameFlag ? FilePath : FileName;	//表示方法切替に従い表示
 		}
 
 		//ハッシュリストを初期化

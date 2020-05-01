@@ -49,9 +49,12 @@ namespace HashComparator
 			FileADropRect.Visibility = Visibility.Visible;
 			FileBDropRect.Visibility = Visibility.Visible;
 
-			//ファイル名初期化
-			FileANameLabel.Content = "ファイルをドロップ または クリックして参照";
-			FileBNameLabel.Content = "ファイルをドロップ";
+			//ファイル名ラベルを登録
+			fileA.FileNameTextBlock = FileANameTextBlock;
+			fileB.FileNameTextBlock = FileBNameTextBlock;
+			//ファイル名ラベルを更新
+			fileA.SetFileNameLabel();
+			fileB.SetFileNameLabel();
 
 			//ファイルAのハッシュ値ボタンリストにボタンを追加
 			fileA.HashButtons.Add("MD5", FileAMD5Button);
@@ -72,13 +75,16 @@ namespace HashComparator
 			//テスト
 			fileA.FilePath = @"D:\working_from_home\dl_rand\images\lfsr16\初期値比較\test.png";
 			fileB.FilePath = @"D:\working_from_home\dl_rand\images\lfsr16\初期値比較\1132.png";
+			//ファイル名ラベルを更新
+			fileA.SetFileNameLabel();
+			fileB.SetFileNameLabel();
 
 			GetFileHashValues(fileA, fileA.FilePath);
 			fileA.Status = FileDatas.FileLoadStatus.Selected;
 			//GetFileHashValues(fileBButtonList, fileBPath);
 		}
 
-		//ハッシュ値の取得(ループ化する余地あり)
+		//ハッシュ値の取得(ここ効率悪すぎ改善の余地あり)
 		private void GetFileHashValues(FileDatas data, string filePath)
 		{
 			//MD5
@@ -198,6 +204,32 @@ namespace HashComparator
 			Console.WriteLine($"{name.Name} Clicked!");
 		}
 
+		//アイコンへファイルをドラッグ
+		private void FilePreviewDragOver(object sender, DragEventArgs e)
+		{
+			e.Effects = DragDropEffects.Copy;
+			e.Handled = e.Data.GetDataPresent(DataFormats.FileDrop);
+		}
+
+		//アイコンへファイルをドロップ
+		private void FileDrop(object sender, DragEventArgs e)
+		{
+			var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+			if(files != null)
+			{
+				foreach(var path in files)
+				{
+					MessageBox.Show(path);
+				}
+			}
+		}
+
+		//ファイル読み込み
+		private void FileLoad(FileDatas data, string path)
+		{
+
+		}
+
 		//ファイルアイコンクリックイベント
 		private void FileIconImageClicked(object sender, RoutedEventArgs e)
 		{
@@ -211,9 +243,25 @@ namespace HashComparator
 				MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 
+		//マウス画面上クリックイベント
 		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			//e.Source.GetType().Name
+			var target = e.Source;
+
+			switch(target.GetType().Name)
+			{
+				case "TextBlock":
+					var resultA = target == fileA.FileNameTextBlock;				//A側のTextBlockか判定
+					var resultB = target == fileB.FileNameTextBlock;				//B側のTextBlockか判定
+					var select = resultA ? fileA : (resultB ? fileB : null);        //判定の結果から操作対象を決定
+
+					if (select == null)	return;                                     //結果がnullなら何もしない
+
+					select.ViewFileNameFlag = !select.ViewFileNameFlag;             //ファイル名の表示方法をトグル
+					select.SetFileNameLabel();                                      //ファイル名の更新
+
+					break;
+			}
 		}
 	}
 }

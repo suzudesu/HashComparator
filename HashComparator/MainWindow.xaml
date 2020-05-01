@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:HashComparator"
         mc:Ignorable="d"
         Title="HashComparator"
-		Height="338" Width="700" MouseDown="Window_MouseDown">
+		Height="337" Width="700" MouseDown="Window_MouseDown">
 
 	<Grid x:Name="MainGrid">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="0"/>
+			<ColumnDefinition Width="52"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
@@ -29,8 +30,10 @@
 				VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
 				Background="Transparent"
 				BorderBrush="Transparent"
-				AllowDrop="True"
 				Click="FileIconImageClicked"
+				AllowDrop="True"
+				PreviewDragOver="FilePreviewDragOver"
+				Drop="FileDrop"
 				Margin="3, 3, 3, 0">
 
 			<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -53,11 +56,12 @@
 			</Grid>
 		</Button>
 
-		<Label x:Name="FileANameLabel"
-			   Grid.Row="1" Grid.Column="0"
-			   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-			   HorizontalContentAlignment="Center"
-			   Margin="0"/>
+		<TextBlock x:Name="FileANameTextBlock"
+				   Grid.Row="1" Grid.Column="0"
+				   VerticalAlignment="Stretch" HorizontalAlignment="Center"
+				   TextWrapping="WrapWithOverflow"
+				   TextTrimming="CharacterEllipsis"
+				   Margin="0"/>
 
 		<Button x:Name="FileAMD5Button"
 				Grid.Row="2" Grid.Column="0"
@@ -93,12 +97,14 @@
 
 		<!-- Colmun 2 -->
 		<Button x:Name="FileBImageButton"
-				Grid.Row="0" Grid.Column="2"
+				Grid.Row="0" Grid.Column="3"
 				VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
 				Background="Transparent"
 				BorderBrush="Transparent"
-				AllowDrop="True"
 				Click="FileIconImageClicked"
+				AllowDrop="True"
+				PreviewDragOver="FilePreviewDragOver"
+				Drop="FileDrop"
 				Margin="3, 3, 3, 0">
 
 			<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -121,14 +127,15 @@
 			</Grid>
 		</Button>
 
-		<Label x:Name="FileBNameLabel"
-			   Grid.Row="1" Grid.Column="2"
-			   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-			   HorizontalContentAlignment="Center"
-			   Margin="0"/>
+		<TextBlock x:Name="FileBNameTextBlock"
+				   Grid.Row="1" Grid.Column="3"
+				   VerticalAlignment="Stretch" HorizontalAlignment="Center"
+				   TextWrapping="WrapWithOverflow"
+				   TextTrimming="CharacterEllipsis"
+				   Margin="0"/>
 
 		<Button x:Name="FileBMD5Button"
-				Grid.Row="2" Grid.Column="2"
+				Grid.Row="2" Grid.Column="3"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
@@ -136,7 +143,7 @@
 				Margin="1, 2, 1, 2"/>
 
 		<Button x:Name="FileBSHA256Button"
-				Grid.Row="3" Grid.Column="2"
+				Grid.Row="3" Grid.Column="3"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
@@ -144,7 +151,7 @@
 				Margin="1, 2, 1, 2"/>
 
 		<Button x:Name="FileBSHA384Button"
-				Grid.Row="4" Grid.Column="2"
+				Grid.Row="4" Grid.Column="3"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
@@ -152,7 +159,7 @@
 				Margin="1, 2, 1, 2"/>
 
 		<Button x:Name="FileBSHA512Button"
-				Grid.Row="5" Grid.Column="2"
+				Grid.Row="5" Grid.Column="3"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
@@ -164,24 +171,24 @@
 			   Grid.Row="2" Grid.Column="1"
 			   VerticalAlignment="Top" HorizontalAlignment="Center"
 			   Foreground="DimGray"
-			   Content="MD5"/>
+			   Content="MD5" Grid.ColumnSpan="2" Margin="8,0"/>
 
 		<Label x:Name="SHA256NameLabel"
 			   Grid.Row="3" Grid.Column="1"
 			   VerticalAlignment="Top" HorizontalAlignment="Center"
 			   Foreground="DimGray"
-			   Content="SHA256"/>
+			   Content="SHA256" Grid.ColumnSpan="2"/>
 
 		<Label x:Name="SHA384NameLabel"
 			   Grid.Row="4" Grid.Column="1"
 			   VerticalAlignment="Top" HorizontalAlignment="Center"
 			   Foreground="DimGray"
-			   Content="SHA384"/>
+			   Content="SHA384" Grid.ColumnSpan="2"/>
 
 		<Label x:Name="SHA512NameLabel"
 			   Grid.Row="5" Grid.Column="1"
 			   VerticalAlignment="Top" HorizontalAlignment="Center"
 			   Foreground="DimGray"
-			   Content="SHA512"/>
+			   Content="SHA512" Grid.ColumnSpan="2"/>
 	</Grid>
 </Window>
