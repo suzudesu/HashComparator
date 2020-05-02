@@ -11,8 +11,7 @@
 	<Grid x:Name="MainGrid">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="0"/>
-			<ColumnDefinition Width="52"/>
+			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
@@ -68,6 +67,7 @@
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
+				MouseEnter="HashValueButtonEnter"
 				FontFamily="Consolas"
 				Margin="1, 2, 1, 2"/>
 
@@ -76,6 +76,7 @@
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
+				MouseEnter="HashValueButtonEnter"
 				FontFamily="Consolas"
 				Margin="1, 2, 1, 2"/>
 
@@ -84,6 +85,7 @@
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
+				MouseEnter="HashValueButtonEnter"
 				FontFamily="Consolas"
 				Margin="1, 2, 1, 2"/>
 
@@ -92,6 +94,7 @@
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
+				MouseEnter="HashValueButtonEnter"
 				FontFamily="Consolas"
 				Margin="1, 2, 1, 2"/>
 
@@ -139,6 +142,7 @@
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
+				MouseEnter="HashValueButtonEnter"
 				FontFamily="Consolas"
 				Margin="1, 2, 1, 2"/>
 
@@ -147,6 +151,7 @@
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
+				MouseEnter="HashValueButtonEnter"
 				FontFamily="Consolas"
 				Margin="1, 2, 1, 2"/>
 
@@ -155,6 +160,7 @@
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
+				MouseEnter="HashValueButtonEnter"
 				FontFamily="Consolas"
 				Margin="1, 2, 1, 2"/>
 
@@ -163,32 +169,39 @@
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				HorizontalContentAlignment="Left"
 				Click="HashValueButtonClicked"
+				MouseEnter="HashValueButtonEnter"
 				FontFamily="Consolas"
 				Margin="1, 2, 1, 2"/>
 
 		<!-- Colmn 1 -->
+		<Label x:Name="JudgmentResultLabel"
+			   Grid.Row="0" Grid.Column="1"
+			   VerticalAlignment="Center" HorizontalContentAlignment="Center"
+			   Foreground="DimGray"/>
+
 		<Label x:Name="MD5NameLabel"
 			   Grid.Row="2" Grid.Column="1"
 			   VerticalAlignment="Top" HorizontalAlignment="Center"
 			   Foreground="DimGray"
-			   Content="MD5" Grid.ColumnSpan="2" Margin="8,0"/>
+			   Content="MD5"
+			   Margin="8,0"/>
 
 		<Label x:Name="SHA256NameLabel"
 			   Grid.Row="3" Grid.Column="1"
 			   VerticalAlignment="Top" HorizontalAlignment="Center"
 			   Foreground="DimGray"
-			   Content="SHA256" Grid.ColumnSpan="2"/>
+			   Content="SHA256"/>
 
 		<Label x:Name="SHA384NameLabel"
 			   Grid.Row="4" Grid.Column="1"
 			   VerticalAlignment="Top" HorizontalAlignment="Center"
 			   Foreground="DimGray"
-			   Content="SHA384" Grid.ColumnSpan="2"/>
+			   Content="SHA384"/>
 
 		<Label x:Name="SHA512NameLabel"
 			   Grid.Row="5" Grid.Column="1"
 			   VerticalAlignment="Top" HorizontalAlignment="Center"
 			   Foreground="DimGray"
-			   Content="SHA512" Grid.ColumnSpan="2"/>
+			   Content="SHA512"/>
 	</Grid>
 </Window>

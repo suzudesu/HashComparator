@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
-using System.Data;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Security.Cryptography;
 using HashComparator.Settings;
+using Microsoft.Win32;
 
 namespace HashComparator
 {
@@ -115,7 +107,6 @@ namespace HashComparator
 				var hashA = fileA.GetHashValue(key);
 				var hashB = fileB.GetHashValue(key);
 
-
 				if (hashA.Length != 0)	//ファイルA側が空白でない
 				{
 					if (hashB.Length == 0)      //ファイルB側が空白
@@ -130,11 +121,19 @@ namespace HashComparator
 			}
 		}
 
+		//ハッシュ値ボタンにマウスカーソルが入ったら
+		private void HashValueButtonEnter(object sender, MouseEventArgs e)
+		{
+			ToolTipService.SetToolTip((Button)sender, 
+				new ToolTip { Content = "クリックするとクリップボードにコピーされます"});
+		}
+
 		//ハッシュ値ボタンクリックイベント
 		private void HashValueButtonClicked(object sender, RoutedEventArgs e)
 		{
 			var name = (Button)sender;
-			Console.WriteLine($"{name.Name} Clicked!");
+
+			Clipboard.SetText(name.Content.ToString());                             //押されたハッシュ値をクリップボードにコピー
 		}
 
 		//ファイルをドラッグ
@@ -147,48 +146,53 @@ namespace HashComparator
 		//ファイルをドロップ
 		private void FileDrop(object sender, DragEventArgs e)
 		{
-			var files = (string[])e.Data.GetData(DataFormats.FileDrop);             //ドロップされたファイルをリスト化
+			//ドロップされたファイルをリスト化
+			Reception(sender, (string[])e.Data.GetData(DataFormats.FileDrop));		//ドロップされたファイルをリスト化して読み込み
+		}
 
-			if (files == null || files.Length <= 0)									//何も取得できなければ何もしない
+		//ファイル受付
+		private void Reception(object sender, string[] files)
+		{
+			if (files == null || files.Length <= 0)                                 //何も取得できなければ何もしない
 				return;
 
 			//ファイル以外が含まれていないか
 			foreach (var path in files)
 			{
-				if(!File.Exists(path))
+				if (!File.Exists(path))
 				{
-					MessageBox.Show("ファイルのみをドロップしてください。", "ファイル以外が選択されました", 
+					MessageBox.Show("ファイルのみをドロップしてください。", "ファイル以外が選択されました",
 						MessageBoxButton.OK, MessageBoxImage.Error);
 					return;
 				}
 			}
 
 			//ファイルが2つだったら
-			if(files.Length == 2)
+			if (files.Length == 2)
 			{
 				var result = MessageBox.Show("同時に読み込みますか？\r\n" +
-					"「いいえ」をクリックすると読み込みがキャンセルされます。", "ファイルが2つ選択されています", 
+					"「いいえ」をクリックすると読み込みがキャンセルされます。", "ファイルが2つ選択されています",
 					MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-				if (result == MessageBoxResult.No)									//いいえを押したら何もしない
+				if (result == MessageBoxResult.No)                                  //いいえを押したら何もしない
 					return;
 
-				FileLoad(fileA, files[0]);											//ファイルA側に読み込み
+				FileLoad(fileA, files[0]);                                          //ファイルA側に読み込み
 				FileLoad(fileB, files[1]);                                          //ファイルB側に読み込み
 			}
 
 			//ファイルが3つ以上だったら何もしない
-			if(files.Length >= 3)
+			if (files.Length >= 3)
 			{
-				MessageBox.Show("読み込めるファイルは2つ以下です。", "ファイルが多すぎます", 
+				MessageBox.Show("読み込めるファイルは2つ以下です。", "ファイルが多すぎます",
 					MessageBoxButton.OK, MessageBoxImage.Error);
 				return;
 			}
 
 			//ドロップされた方に読み込み(ここに到達した時点でドロップされたファイルは1つ)
-			if (sender == fileA.FileIconButton)										//ファイルA側
+			if (sender == fileA.FileIconButton)                                     //ファイルA側
 				FileLoad(fileA, files[0]);
-			if (sender == fileB.FileIconButton)										//ファイルB側
+			if (sender == fileB.FileIconButton)                                     //ファイルB側
 				FileLoad(fileB, files[0]);
 
 			//ハッシュ値の比較
@@ -209,14 +213,15 @@ namespace HashComparator
 		//ファイルアイコンクリックイベント
 		private void FileIconImageClicked(object sender, RoutedEventArgs e)
 		{
-			var select = (Button)sender == fileA.FileIconButton ? fileA : fileB;	//クリックされたボタンがどちらか判定
+			//ファイル読み込みダイアログを表示してファイル読み込み
+			var dialog = new OpenFileDialog
+			{
+				Filter = "すべてのファイル(*.*)|*.*",
+				Multiselect = true,
+			};
 
-			if (select.Status != FileDatas.FileLoadStatus.Selected)					//ファイルが選択されていなければ何もしない
-				return;
-
-			//ファイルパスを表示
-			MessageBox.Show(select.FilePath, $"{select.GetFileName()} のパス",
-				MessageBoxButton.OK, MessageBoxImage.Information);
+			if (dialog.ShowDialog() == true)
+				Reception(sender, dialog.FileNames);
 		}
 
 		//マウス画面上クリックイベント
