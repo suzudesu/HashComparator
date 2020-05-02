@@ -66,77 +66,31 @@ namespace HashComparator
 			fileB.InitHashList();
 		}
 
-		//ハッシュ値の取得(ここ効率悪すぎ改善の余地あり)
+		//ハッシュ値の取得
 		private void GetFileHashValues(FileDatas data, string filePath)
 		{
-			//MD5
-			using (var md5 = new MD5CryptoServiceProvider())
-			{
-				try
-				{
-					using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-					{
-						byte[] hash = md5.ComputeHash(stream);
-						data.HashButtons["MD5"].Content = GetHashString(hash);
-					}
-				}
-				catch (Exception e)
-				{
-					data.HashButtons["MD5"].Content = "エラー";
-					MessageBox.Show(e.Message, "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-				}
-			}
+			IDictionary<string, HashAlgorithm> HashProviders = new Dictionary<string, HashAlgorithm>();		//ハッシュアルゴリズム格納用
 
-			//SHA256
-			using (var sha256 = new SHA256CryptoServiceProvider())
-			{
-				try
-				{
-					using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-					{
-						byte[] hash = sha256.ComputeHash(stream);
-						data.HashButtons["SHA256"].Content = GetHashString(hash);
-					}
-				}
-				catch (Exception e)
-				{
-					data.HashButtons["SHA256"].Content = "エラー";
-					MessageBox.Show(e.Message, "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-				}
-			}
+			//ハッシュアルゴリズムの登録
+			HashProviders.Add("MD5", new MD5CryptoServiceProvider());
+			HashProviders.Add("SHA256", new SHA256CryptoServiceProvider());
+			HashProviders.Add("SHA384", new SHA384CryptoServiceProvider());
+			HashProviders.Add("SHA512", new SHA512CryptoServiceProvider());
 
-			//SHA384
-			using (var sha384 = new SHA384CryptoServiceProvider())
+			//登録したすべてのアルゴリズムを利用して取得
+			foreach(var key in HashProviders.Keys)
 			{
 				try
 				{
-					using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+					using (var stream = new FileStream(filePath, FileMode.Open ,FileAccess.Read))
 					{
-						byte[] hash = sha384.ComputeHash(stream);
-						data.HashButtons["SHA384"].Content = GetHashString(hash);
+						byte[] hash = HashProviders[key].ComputeHash(stream);
+						data.HashButtons[key].Content = GetHashString(hash);
 					}
 				}
 				catch (Exception e)
 				{
-					data.HashButtons["SHA384"].Content = "エラー";
-					MessageBox.Show(e.Message, "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-				}
-			}
-
-			//SHA512
-			using (var sha512 = new SHA512CryptoServiceProvider())
-			{
-				try
-				{
-					using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-					{
-						byte[] hash = sha512.ComputeHash(stream);
-						data.HashButtons["SHA512"].Content = GetHashString(hash);
-					}
-				}
-				catch (Exception e)
-				{
-					data.HashButtons["SHA512"].Content = "エラー";
+					data.HashButtons[key].Content = "エラー";
 					MessageBox.Show(e.Message, "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}

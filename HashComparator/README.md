@@ -9,6 +9,6 @@
 - SHA256
 - SHA384
 - SHA512
-### 動作保証環境
+### 動作環境
 - Windows10 1703以降
 - .Net Framework 4.7.2
