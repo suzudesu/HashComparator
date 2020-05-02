@@ -21,6 +21,7 @@ namespace HashComparator.Settings
 
 		//ファイルアイコンボタン関連
 		public Button FileIconButton { get; set; }								//ボタンの実体
+		public Image FileImage { get; set; }									//ボタンのアイコン画像
 		public bool ViewFileNameFlag { get; set; }								//ファイル名の表示方法(フルパス:true, 名前のみ:false)
 		public TextBlock FileNameTextBlock { get; set; }						//ファイル名テキストブロック
 
@@ -36,8 +37,27 @@ namespace HashComparator.Settings
 		public FileDatas()
 		{
 			FilePath = "";
-			Status = FileLoadStatus.NoSelect;
 			ViewFileNameFlag = false;
+		}
+
+		//状態設定
+		public void SetStatus(FileLoadStatus status)
+		{
+			Status = status;
+
+			switch(status)
+			{
+				case FileLoadStatus.Selected:	//選択済み
+					FileImage.Source = new BitmapImage(new Uri("../images/ok.png", UriKind.Relative));
+
+					break;
+				case FileLoadStatus.NoSelect:	//未選択
+					FileImage.Source = new BitmapImage(new Uri("../images/add.png", UriKind.Relative));
+
+					break;
+				case FileLoadStatus.Error:		//エラー
+					break;
+			}
 		}
 
 		//ファイル名の設定

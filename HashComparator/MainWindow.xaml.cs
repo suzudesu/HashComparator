@@ -29,9 +29,6 @@ namespace HashComparator
 		//ファイル状態
 		private FileDatas fileA = new FileDatas();
 		private FileDatas fileB = new FileDatas();
-		//アイコン
-		public Uri addImage = new Uri("images/add.png", UriKind.Relative);   //未選択時のアイコン
-		public Uri okImage = new Uri("images/ok.png", UriKind.Relative);     //選択済時のアイコン
 
 		public MainWindow()
 		{
@@ -40,21 +37,17 @@ namespace HashComparator
 			//ファイルアイコンボタンの設定
 			fileA.FileIconButton = FileAImageButton;
 			fileB.FileIconButton = FileBImageButton;
-			
-			//ファイルアイコン初期化
-			FileAImage.Source = new BitmapImage(okImage);
-			FileBImage.Source = new BitmapImage(addImage);
-
-			//枠の表示
-			FileADropRect.Visibility = Visibility.Visible;
-			FileBDropRect.Visibility = Visibility.Visible;
-
+			fileA.FileImage = FileAImage;
+			fileB.FileImage = FileBImage;
 			//ファイル名ラベルを登録
 			fileA.FileNameTextBlock = FileANameTextBlock;
 			fileB.FileNameTextBlock = FileBNameTextBlock;
 			//ファイル名ラベルを更新
 			fileA.SetFileNameLabel();
 			fileB.SetFileNameLabel();
+			//ファイル読み込み状態を更新
+			fileA.SetStatus(FileDatas.FileLoadStatus.NoSelect);
+			fileB.SetStatus(FileDatas.FileLoadStatus.NoSelect);
 
 			//ファイルAのハッシュ値ボタンリストにボタンを追加
 			fileA.HashButtons.Add("MD5", FileAMD5Button);
@@ -71,17 +64,6 @@ namespace HashComparator
 			//ハッシュ値ボタンを初期化(ファイルA, B)
 			fileA.InitHashList();
 			fileB.InitHashList();
-
-			//テスト
-			fileA.FilePath = @"D:\working_from_home\dl_rand\images\lfsr16\初期値比較\test.png";
-			fileB.FilePath = @"D:\working_from_home\dl_rand\images\lfsr16\初期値比較\1132.png";
-			//ファイル名ラベルを更新
-			fileA.SetFileNameLabel();
-			fileB.SetFileNameLabel();
-
-			GetFileHashValues(fileA, fileA.FilePath);
-			fileA.Status = FileDatas.FileLoadStatus.Selected;
-			//GetFileHashValues(fileBButtonList, fileBPath);
 		}
 
 		//ハッシュ値の取得(ここ効率悪すぎ改善の余地あり)
@@ -158,9 +140,6 @@ namespace HashComparator
 					MessageBox.Show(e.Message, "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
-
-			//ハッシュ値の比較
-			CompareHash();
 		}
 
 		//ハッシュコード化
@@ -187,7 +166,7 @@ namespace HashComparator
 				{
 					if (hashB.Length == 0)      //ファイルB側が空白
 						fileA.HashButtons[key].BorderBrush = buttonColors.Loaded;
-					else if (fileA == fileB)    //一致
+					else if (hashA == hashB)    //一致
 						fileA.HashButtons[key].BorderBrush = fileB.HashButtons[key].BorderBrush = buttonColors.Match;
 					else                        //不一致
 						fileA.HashButtons[key].BorderBrush = fileB.HashButtons[key].BorderBrush = buttonColors.NotMatch;
@@ -204,30 +183,73 @@ namespace HashComparator
 			Console.WriteLine($"{name.Name} Clicked!");
 		}
 
-		//アイコンへファイルをドラッグ
+		//ファイルをドラッグ
 		private void FilePreviewDragOver(object sender, DragEventArgs e)
 		{
 			e.Effects = DragDropEffects.Copy;
 			e.Handled = e.Data.GetDataPresent(DataFormats.FileDrop);
 		}
 
-		//アイコンへファイルをドロップ
+		//ファイルをドロップ
 		private void FileDrop(object sender, DragEventArgs e)
 		{
-			var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-			if(files != null)
+			var files = (string[])e.Data.GetData(DataFormats.FileDrop);             //ドロップされたファイルをリスト化
+
+			if (files == null || files.Length <= 0)									//何も取得できなければ何もしない
+				return;
+
+			//ファイル以外が含まれていないか
+			foreach (var path in files)
 			{
-				foreach(var path in files)
+				if(!File.Exists(path))
 				{
-					MessageBox.Show(path);
+					MessageBox.Show("ファイルのみをドロップしてください。", "ファイル以外が選択されました", 
+						MessageBoxButton.OK, MessageBoxImage.Error);
+					return;
 				}
 			}
+
+			//ファイルが2つだったら
+			if(files.Length == 2)
+			{
+				var result = MessageBox.Show("同時に読み込みますか？\r\n" +
+					"「いいえ」をクリックすると読み込みがキャンセルされます。", "ファイルが2つ選択されています", 
+					MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+				if (result == MessageBoxResult.No)									//いいえを押したら何もしない
+					return;
+
+				FileLoad(fileA, files[0]);											//ファイルA側に読み込み
+				FileLoad(fileB, files[1]);                                          //ファイルB側に読み込み
+			}
+
+			//ファイルが3つ以上だったら何もしない
+			if(files.Length >= 3)
+			{
+				MessageBox.Show("読み込めるファイルは2つ以下です。", "ファイルが多すぎます", 
+					MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			//ドロップされた方に読み込み(ここに到達した時点でドロップされたファイルは1つ)
+			if (sender == fileA.FileIconButton)										//ファイルA側
+				FileLoad(fileA, files[0]);
+			if (sender == fileB.FileIconButton)										//ファイルB側
+				FileLoad(fileB, files[0]);
+
+			//ハッシュ値の比較
+			CompareHash();
 		}
 
 		//ファイル読み込み
 		private void FileLoad(FileDatas data, string path)
 		{
-
+			data.FilePath = path;													//パスを設定
+			data.InitHashList();                                                    //ハッシュリストを初期化
+			data.ViewFileNameFlag = false;                                          //ファイル名の表示を切替
+			data.SetFileNameLabel();                                                //ファイル名の表示を更新
+			data.SetStatus(FileDatas.FileLoadStatus.Selected);                      //状態を選択済みに変更
+			GetFileHashValues(data, path);											//ハッシュ値の取得
 		}
 
 		//ファイルアイコンクリックイベント
@@ -248,9 +270,10 @@ namespace HashComparator
 		{
 			var target = e.Source;
 
+			//クリックしたオブジェクト名別処理
 			switch(target.GetType().Name)
 			{
-				case "TextBlock":
+				case "TextBlock":	//TextBlockをクリック
 					var resultA = target == fileA.FileNameTextBlock;				//A側のTextBlockか判定
 					var resultB = target == fileB.FileNameTextBlock;				//B側のTextBlockか判定
 					var select = resultA ? fileA : (resultB ? fileB : null);        //判定の結果から操作対象を決定
