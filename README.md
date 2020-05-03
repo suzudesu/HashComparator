@@ -12,8 +12,8 @@
 ### 動作環境
 - Windows10 1703以降
 - .Net Framework 4.7.2
-# スクリーンショット(GIF)
-![スクリーンショット](https://drive.google.com/uc?export=view&id=1enzZfqlJyUSJ1BtaLvY5O5VjTELdAIe5)
+# キャプチャ
+[![http://img.youtube.com/vi/X3eGcqHz2HQ/0.jpg](https://img.youtube.com/vi/X3eGcqHz2HQ/0.jpg)](https://www.youtube.com/watch?v=X3eGcqHz2HQ)
 # 操作・表示説明
 ### ファイルを読み込む
 ファイルをドラッグアンドドロップするか、ファイルアイコンをクリックして読み込みます。
