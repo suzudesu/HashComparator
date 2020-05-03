@@ -179,6 +179,7 @@ namespace HashComparator
 
 				FileLoad(fileA, files[0]);                                          //ファイルA側に読み込み
 				FileLoad(fileB, files[1]);                                          //ファイルB側に読み込み
+				return;
 			}
 
 			//ファイルが3つ以上だったら何もしない
