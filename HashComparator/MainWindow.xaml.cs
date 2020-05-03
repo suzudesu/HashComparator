@@ -83,7 +83,7 @@ namespace HashComparator
 				catch (Exception e)
 				{
 					data.HashButtons[key].Content = "エラー";
-					MessageBox.Show(e.Message, "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+					MessageBox.Show(this, e.Message, "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
 		}
@@ -136,6 +136,20 @@ namespace HashComparator
 			Clipboard.SetText(name.Content.ToString());                             //押されたハッシュ値をクリップボードにコピー
 		}
 
+		//ファイルアイコンクリックイベント
+		private void FileIconImageClicked(object sender, RoutedEventArgs e)
+		{
+			//ファイル読み込みダイアログを表示してファイル読み込み
+			var dialog = new OpenFileDialog
+			{
+				Filter = "すべてのファイル(*.*)|*.*",
+				Multiselect = true,
+			};
+
+			if (dialog.ShowDialog() == true)
+				Reception(sender, dialog.FileNames);
+		}
+
 		//ファイルをドラッグ
 		private void FilePreviewDragOver(object sender, DragEventArgs e)
 		{
@@ -148,9 +162,6 @@ namespace HashComparator
 		{
 			//ドロップされたファイルをリスト化
 			Reception(sender, (string[])e.Data.GetData(DataFormats.FileDrop));      //ドロップされたファイルをリスト化して読み込み
-
-			//ハッシュ値の比較
-			CompareHash();
 		}
 
 		//ファイル受付
@@ -164,7 +175,7 @@ namespace HashComparator
 			{
 				if (!File.Exists(path))
 				{
-					MessageBox.Show("ファイルのみをドロップしてください。", "ファイル以外が選択されました",
+					MessageBox.Show(this, "ファイルのみをドロップしてください。", "ファイル以外が選択されました",
 						MessageBoxButton.OK, MessageBoxImage.Error);
 					return;
 				}
@@ -173,7 +184,7 @@ namespace HashComparator
 			//ファイルが2つだったら
 			if (files.Length == 2)
 			{
-				var result = MessageBox.Show("同時に読み込みますか？\r\n" +
+				var result = MessageBox.Show(this, "同時に読み込みますか？\r\n" +
 					"「いいえ」をクリックすると読み込みがキャンセルされます。", "ファイルが2つ選択されています",
 					MessageBoxButton.YesNo, MessageBoxImage.Information);
 
@@ -182,22 +193,27 @@ namespace HashComparator
 
 				FileLoad(fileA, files[0]);                                          //ファイルA側に読み込み
 				FileLoad(fileB, files[1]);                                          //ファイルB側に読み込み
-				return;
 			}
 
 			//ファイルが3つ以上だったら何もしない
 			if (files.Length >= 3)
 			{
-				MessageBox.Show("読み込めるファイルは2つ以下です。", "ファイルが多すぎます",
+				MessageBox.Show(this, "読み込めるファイルは2つ以下です。", "ファイルが多すぎます",
 					MessageBoxButton.OK, MessageBoxImage.Error);
 				return;
 			}
 
 			//ドロップされた方に読み込み(ここに到達した時点でドロップされたファイルは1つ)
-			if (sender == fileA.FileIconButton)                                     //ファイルA側
-				FileLoad(fileA, files[0]);
-			if (sender == fileB.FileIconButton)                                     //ファイルB側
-				FileLoad(fileB, files[0]);
+			else
+			{
+				if (sender == fileA.FileIconButton)                                     //ファイルA側
+					FileLoad(fileA, files[0]);
+				if (sender == fileB.FileIconButton)                                     //ファイルB側
+					FileLoad(fileB, files[0]);
+			}
+
+			//ハッシュ値の比較
+			CompareHash();
 		}
 
 		//ファイル読み込み
@@ -209,20 +225,6 @@ namespace HashComparator
 			data.SetFileNameLabel();                                                //ファイル名の表示を更新
 			data.SetStatus(FileDatas.FileLoadStatus.Selected);                      //状態を選択済みに変更
 			GetFileHashValues(data, path);											//ハッシュ値の取得
-		}
-
-		//ファイルアイコンクリックイベント
-		private void FileIconImageClicked(object sender, RoutedEventArgs e)
-		{
-			//ファイル読み込みダイアログを表示してファイル読み込み
-			var dialog = new OpenFileDialog
-			{
-				Filter = "すべてのファイル(*.*)|*.*",
-				Multiselect = true,
-			};
-
-			if (dialog.ShowDialog() == true)
-				Reception(sender, dialog.FileNames);
 		}
 
 		//マウス画面上クリックイベント
