@@ -147,7 +147,10 @@ namespace HashComparator
 		private void FileDrop(object sender, DragEventArgs e)
 		{
 			//ドロップされたファイルをリスト化
-			Reception(sender, (string[])e.Data.GetData(DataFormats.FileDrop));		//ドロップされたファイルをリスト化して読み込み
+			Reception(sender, (string[])e.Data.GetData(DataFormats.FileDrop));      //ドロップされたファイルをリスト化して読み込み
+
+			//ハッシュ値の比較
+			CompareHash();
 		}
 
 		//ファイル受付
@@ -195,9 +198,6 @@ namespace HashComparator
 				FileLoad(fileA, files[0]);
 			if (sender == fileB.FileIconButton)                                     //ファイルB側
 				FileLoad(fileB, files[0]);
-
-			//ハッシュ値の比較
-			CompareHash();
 		}
 
 		//ファイル読み込み
