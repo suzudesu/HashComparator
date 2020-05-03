@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="HashComparator.exe" version="1.0.0.4" publicKeyToken="996e967c4f409b51" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="HashComparator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="HashComparator.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC マニフェスト オプション
+          Windows のユーザー アカウント制御のレベルを変更するには、
+          requestedExecutionLevel ノードを以下のいずれかで置換します。
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         下位互換性を保つためにファイルおよびレジストリの仮想化を使用する場合、
+         requestedExecutionLevel ノードを削除します。
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HashComparator.exe" size="29144">
+      <assemblyIdentity name="HashComparator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>SvIxlk66p31AS4Ny3RAkBf+ISM7OLPzB/LE52rDj5cE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="HashComparator.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=EINAIGAMINGPC\k016c" issuerKeyHash="6db4f54a743b19aee0f962b3d7fc259339bca7d7" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>rULLl9cqzsidi04h1Qq67gkPynUgtGYKhtkNm2rVcMY=</DigestValue></Reference></SignedInfo><SignatureValue>Qm2/UYopprsqMjtqfZBNY7gxAa3m1ZOG8UBECaKL4qPA0G2K03S4x1qFHrP+IXekJk92mitUGo8dDtd3J91ysZ3pdEJI5KYIdFlz67cGABCHxXDU44bP1jB1RmDU3j8E4AU9MS+UFWRgi6uyvcf6Q/KV2TfcbkfQhG1ghdsQ6lw=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>oyn8SSl71HjeZ637TSQsEKw7fao94vTrbmEzVmno3TvwB8jmUZwhcZRvO1ekml2dg825iII8kykW6SvaQLEgIS9va3gp3xdqTntdivoUgQ0CwXBOJ9GusWCfY/52AAfK1uzchuixWdEN/JDgaq+mwI5VieZoJ7i+3aSjSJhO0N0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="c670d56a9b0dd9860a66b42075ca0f09eeba0ad5214e8b9dc8ce2ad797cb42ad" Description="" Url=""><as:assemblyIdentity name="HashComparator.exe" version="1.0.0.4" publicKeyToken="996e967c4f409b51" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=EINAIGAMINGPC\k016c</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>5WstSuFkbpYIDA3WbVNEGzyWIuwuXTv5g0pYc+0F0ng=</DigestValue></Reference></SignedInfo><SignatureValue>izo/ABVy7zOFerAoXR9194SzIs+/UglwXyTQYY6zpN15SeLnWxEj4y9J/lAVR2Qnfxysfvmtza4lZRRcmuFWrlVibnhpeivv+BkXQCzTGTPHIJV3wolMxCxhhN28WWTPnrprV0pePYtlFWpDTeCwY0dQgKq10ZRoE91ScuBsE0c=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>oyn8SSl71HjeZ637TSQsEKw7fao94vTrbmEzVmno3TvwB8jmUZwhcZRvO1ekml2dg825iII8kykW6SvaQLEgIS9va3gp3xdqTntdivoUgQ0CwXBOJ9GusWCfY/52AAfK1uzchuixWdEN/JDgaq+mwI5VieZoJ7i+3aSjSJhO0N0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB5TCCAU6gAwIBAgIQE+k8lYoEy7pKUupyfQvkgzANBgkqhkiG9w0BAQsFADAxMS8wLQYDVQQDHiYARQBJAE4AQQBJAEcAQQBNAEkATgBHAFAAQwBcAGsAMAAxADYAYzAeFw0yMDA1MDIxMjMyMTJaFw0yMTA1MDIxODMyMTJaMDExLzAtBgNVBAMeJgBFAEkATgBBAEkARwBBAE0ASQBOAEcAUABDAFwAawAwADEANgBjMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCjKfxJKXvUeN5nrftNJCwQrDt9qj3i9OtuYTNWaejdO/AHyOZRnCFxlG87V6SaXZ2DzbmIgjyTKRbpK9pAsSAhL29reCnfF2pOe12K+hSBDQLBcE4n0a6xYJ9j/nYAB8rW7NyG6LFZ0Q38kOBqr6bAjlWJ5mgnuL7dpKNImE7Q3QIDAQABMA0GCSqGSIb3DQEBCwUAA4GBAIqcM8Du/kZGTCu+pi6uNv5jIyqfyDF2kxstwYW0JeLOEsQIYajE9me7S3rIjCb8Ecsn4eAghjlwk4jLCf/iBLCo8G1fXQ3yQ0KD2sljXxsC2bD+Jk1wps6uniaEQy7w1lKCXNzhwNT5brIgOZCdSg0hOVcy2mOonKWhPNXHqA0O</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
